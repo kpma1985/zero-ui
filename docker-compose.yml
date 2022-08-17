@@ -43,8 +43,8 @@ services:
     volumes:
       - $PWD/Caddyfile:/etc/caddy/Caddyfile
       - $PWD/site:/srv
-      - caddy_data:/data
-      - caddy_config:/config
+      - $PWD/caddy_data:/data
+      - $PWD/caddy_config:/config
     ports:
       - "80:80"
       - "443:443"
@@ -52,4 +52,3 @@ services:
 volumes:
   zero-ui_data:
   controller_data:
-  caddy_data:
