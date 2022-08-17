@@ -33,15 +33,18 @@ services:
       - ZU_DEFAULT_PASSWORD=zero-ui
     expose:
       - "4000"
-  https-proxy:
+  caddy:
     image: caddy:latest
-    container_name: zu-https-proxy
+    container_name: caddy
     restart: unless-stopped
     depends_on:
       - zero-ui
     command: caddy reverse-proxy --from YOURDOMAIN.com --to zero-ui:4000
     volumes:
+      - $PWD/Caddyfile:/etc/caddy/Caddyfile
+      - $PWD/site:/srv
       - caddy_data:/data
+      - caddy_config:/config
     ports:
       - "80:80"
       - "443:443"
